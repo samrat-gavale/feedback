@@ -1,0 +1,98 @@
+<tr bgcolor="#F2F5A9">
+	<td valign="top"  >
+			<?php
+				include "../common/crc_menu.html";
+				include "../classes/crc_graph.mod.php";
+			?>
+	</td>
+		<td valign="top" align="left" width="100%">
+	    <!--
+        This is the content
+      -->
+      <table class="tbl" cellpadding="15" width="100%" >
+        <tr>
+          <?php
+            if (isset($_SESSION['msg'])) {
+                $len = strlen($_SESSION['msg']);
+            } else {
+                $len = 0;
+            }
+            if ($len > 0) {
+               	print '<span class=red>' . $_SESSION['msg'] . '</span>';
+				$_SESSION['msg'] = '';
+            } else {
+				$data = $_SESSION['evaluation'];
+				$data_sdevcnt = $_SESSION['sdevcnt'];
+				if ($data != null) {
+					print '<th colspan="2"><b>Feedback for the course ' . $_SESSION['coursesdata']['coursenum'] . ' - ' . $_SESSION['coursesdata']['coursename'];
+					print '<br><font color="white"><a href="crc_handler.php?method=evaluation&func=downloadpdf3&scheduleid=' . $_GET['scheduleid'] . '" target="new"><font color="red">Download 1</font></a></font>';
+					print '<br><font color="white"><a href="crc_handler.php?method=evaluation&func=downloadpdf2&scheduleid=' . $_GET['scheduleid'] . '" target="new"><font color="red">Download 2</font></a></font></b></th>';
+		print '</tr>';
+		print '<tr><td>';
+		print '<table class="std">';
+
+	$width_ques = 450;
+	$width_no = 25;
+	$width_avg = 55;
+	$width_sdev = 55;
+	$width_cnt = 55;
+	$course_feedback_tbl = <<<EOD
+		<tr align="center">
+			<td width="$width_no">No.</td>
+			<td width="$width_ques">Question</td>
+			<td width="$width_avg">Average</td>
+			<td width="$width_sdev">Standard Deviation</td>
+			<td width="$width_cnt">No. of responses</td>
+    </tr>
+EOD;
+
+					/* the count(data)-1 is for considering the last element of array which contains all the
+					 * comments, i.e 0-26 contain questions (out of which only 0-21 are printed) and '27' contains
+					 * comments
+					 */
+					for($i = 0; $i < count($data)-1; $i++) 
+					{
+//						if (($data[$i]['comm'] != "") && ($data[$i]['comm'] != "NA"))
+/* the number '21' is hardcoded and the comparison should be replaced to check whether the question number belong to array
+ * of questions with question type 'OPTIONS'
+ */
+						if($data[$i]['que_no'] >21)
+						{
+							//we are printing the comments separately, at the end of this for loop.
+/*							$course_feedback_tbl.= '<tr align="center">';
+							$course_feedback_tbl.= '<td align="center"> ' . $data[$i]['que_no'] . '</td>';
+							$course_feedback_tbl.='<td  colspan="4" align="left"> ' . $data[$i]['que'];
+							$course_feedback_tbl.= $data[$i]['comm'] . '</td>';
+*///						$values['Q' . ($i+1)] = $data[$i]['ans'];     //array index starts form 0, question number starts from 1
+						}
+						else 
+						{
+							$course_feedback_tbl.= '<tr align="center">';
+							$course_feedback_tbl.= '<td align="center"> ' . $data[$i]['que_no'] . '</td>';
+							$course_feedback_tbl.= '<td align="left"> ' . $data[$i]['que'] . '</td>';
+							$course_feedback_tbl.= '<td>' . $data[$i]['ans'] . '</td>';   //1st </td> for ending question
+							$course_feedback_tbl.= '<td>' . $data_sdevcnt[$i]['standarddeviation'] . '</td>';       //sdev 
+							$course_feedback_tbl.= '<td>' . $data_sdevcnt[$i]['responsecount'] . '</td>';       //no  of count
+							$values['Q' . ($i+1)] = $data[$i]['ans'];     //array index starts form 0, question number starts from 1
+						}
+						$course_feedback_tbl.= '</tr>';
+					}
+					$course_feedback_tbl.= $data['comm'];
+
+					echo $course_feedback_tbl;
+									
+					print '<tr><td align="center" colspan="5">';
+					print '<table>';
+					print '<tr><td align="center"><br></td></tr>';								
+					print ae_bar_html($values);
+					print '<tr><td align="center" colspan="' . count($values) . '"><b>Mean feedback at each question (min 1, max 5)</b></td></tr>';
+					print '</table>';
+					print '</td></tr>';
+				print '</table>';
+				}
+            }
+        ?>
+    </td>
+  </tr>
+</table>
+

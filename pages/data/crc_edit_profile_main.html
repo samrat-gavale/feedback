@@ -1,0 +1,147 @@
+<form name="editprofile" action="crc_handler.php?method=profile&func=updatestudent" method="post">
+
+<tr bgcolor="#F2F5A9">
+	<td valign="top"  >
+			<?php
+				include "../common/crc_menu.html";
+				include "../classes/crc_graph.mod.php";
+			?>
+	</td>
+		<td valign="top" align="left" width="100%">
+	    <!--
+        This is the content
+      -->
+
+      <table class="tbl" cellpadding="5" width="100%" class="std" cellspacing="0">
+    <?php
+    if (isset($_SESSION['msg'])) {
+            $len = strlen($_SESSION['msg']);
+        } else {
+            $len = 0;
+        }
+		if ($len > 0) {
+			if ($_SESSION['msg'] != "Invalid input") {//don't display an error message if the input is empty
+    			print('<tr><td class="error" align="center"><b>' . $_SESSION['msg'] . '</b></td></tr>');
+				$_SESSION['msg'] = "";
+			}
+		}
+
+		print '<tr>';
+		print '<th colspan="2"><em>Students list</em></th>';
+		print '</tr>';
+
+		print '<tr><td>';
+		print '<table class="std">';
+
+//		print '<table  width="500" align="left" border="0" cellpadding="6" cellspacing="0">';
+		
+		if ($_GET['func'] == 'studentlist') {
+
+			$data = $_SESSION['teacherstudentsdata'];
+			$data_len = count($data);			
+			
+			if ($data_len > 0) {	
+				print '<tr>';
+        		print '<td>Below are all students found in the database:</td>';
+        		print '</tr>';		
+				for ($i = 0; $i < $data_len; $i++) {
+					print '<tr>';
+					print '<td align="left" colspan="2"><a href="crc_handler.php?method=profile&func=editstudent&profileuid=' . $data[$i]['profileuid'] . '"><b>'. $data[$i]['enrollno'] . ' ' . $data[$i]['name'] . '</b></a></td>';
+					print '</tr>';	
+				}			
+			} else {
+        		print '<tr>';
+        		print '<td class="error" align="center">No students found in the database.</td>';
+        		print '</tr>';
+			}
+
+		} else if ($_GET['func'] == 'editstudent') {
+
+			$data = $_SESSION['profiledata'];
+
+			if ($data == null) {
+				print '<tr><td class="error" align="center">Cannot get student profile</td></tr>';
+				return;
+			}			
+
+        	print '<tr>';
+        	print '<td><input type="hidden" name="profileid" value="' . $data[0] . '" class="text"></td>';
+        	print '</tr>';
+
+			print '<tr><br>';
+			print 'Please note that the fields with "<span class="error">*</span>" are mandatory.';
+			print '</tr>';
+
+		  	print '<tr>';
+		  		print '<td align="right"><span class="error">*</span>Username: </td>';
+		 		print '<td><input type="text" name="username" size="15" value="' . $data[1] . '"></td>';
+		  	print '</tr>';
+          	print '<tr>';
+          		print '<td align="right"><span class="error">*</span>Password: </td>';
+          		print '<td><input type="password" name="password" size="15" value=""></td>';
+          	print '</tr>';
+          	print '<tr>';
+          		print '<td align="right"><span class="error">*</span>Enrollment No.: </td>';
+          		print '<td><input type="text" name="enrollno" size="15" value="' . $data[3] . '"</td>';
+          	print '</tr>';
+          	print '<tr>';
+          		print '<td align="right"><span class="error">*</span>Name: </td>';
+          		print '<td><input type="text" name="name" size="15" value="' . $data[4] . '"></td>';
+          	print '</tr>';
+    	  	print '<tr>';
+          		print '<td align="right"><span class="error">*</span>Email: </td>';
+          		print '<td><input type="text" name="email" size="40" value="' . $data[5] . '"></td>';
+          	print '</tr>';
+    		print '<tr>';
+          		print '<td align="right"><span class="error">*</span>Gender: </td>';
+          		print '<td><select name="gender">';
+          		if ($data[7] = 'M') {
+            		print("<option selected>Male</option>");
+            		print("<option>Female</option>");
+          		} else {
+            		print("<option>Male</option>");
+            		print("<option selected>Female</option>");
+          		}
+          		print '    </select>';
+          		print '</td>';
+        	print '</tr>';
+    		print '<tr>';
+          		print '<td align="right"><span class="error">*</span>Date of Birth: </td>';
+          		print '<td><input type="text" name="day" size="2" value="' . substr($data[6], 8, 2) . '">-<input type="text" name="month" size="2" value="' . substr($data[6], 5, 2) . '">-<input type="text" name="year" size="4" value="' . substr($data[6], 0, 4) . '"> (DD-MM-YYYY)';
+          		print '</td>';
+        	print '</tr>';
+			print '<tr>';
+				print '<td align="right">Available Course(s): </td>';
+				print '<td>';
+				$data = $_SESSION['coursesdata'];
+				$scheduledata = $_SESSION['scheduledata'];
+				for ($i=0; $i < count($data); $i++) {
+					//check if the current course is already selected by this student
+					$found = false;
+					for ($j=0; $j < count($scheduledata); $j++) {
+						if (strpos($data[$i]['cnumname'], $scheduledata[$j][1]) !== false) {
+							$found = true;
+							break;
+						}
+					}
+					//display the course as checked or unchecked
+					if ($found == true) {
+						print '<input type=checkbox checked name="course' . $i . '">' . $data[$i]['cnumname'] . '<br>';
+					} else {
+						print '<input type=checkbox name="course' . $i . '">' . $data[$i]['cnumname'] . '<br>';
+					}
+				}
+				print '</td>';
+			print '</tr>';
+  			print '<tr>';
+      			print '<td colspan="2" align="center"><BR/><input type="submit" onclick="javascript:verify(\'editprofile\');" name="update" value="Update">';
+		  		print '</td>';
+    		print '</tr>';
+
+		}
+      		
+		print '</table>';
+
+    ?>
+</form>
+

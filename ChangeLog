@@ -1,0 +1,302 @@
+2011-07-24 11:36  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+        * pages/data/crc_students_main.html, tests/web_test.php, 
+	  pages/data/crc_db_setup_main.html: corrected
+	  unit tests and bug in the emailto link, added message for db setup
+
+2011-07-23 19:15  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* pages/data/crc_students_main.html: added e-mail display when
+	  showing the students list for a given course
+
+2011-06-18 15:34  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+        * classes/crc_admin.cls.php, classes/crc_dbsetup.cls.php,
+          install.txt, mysql/crc_database_setup.sql, mysql/setup.php,
+          pages/crc_evaluation.php, pages/crc_handler.php,
+          pages/crc_login.php, pages/crc_profile.php,
+          pages/crc_register.php, pages/crc_schedule.php,
+          pages/data/crc_login_main.html, tests/dbsetup_test.php,
+          tests/setup_vars.php, tests/simpletest/README,
+          tests/web_test.php: corrections made to ensure compatibility
+	  with WampServer 2.1
+
+2011-04-03 15:40  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* ChangeLog, classes/crc_admin.cls.php,
+	  classes/crc_schedule.cls.php, common/crc_menu.html, install.txt,
+	  mysql/crc_database_setup.sql, pages/crc_courses.php,
+	  pages/crc_handler.php, pages/data/crc_courses_main.html,
+	  pages/data/crc_edit_course_main.html,
+	  pages/data/crc_enrollment_main.html, tests/simpletest/README,
+	  tests/web_test.php: added Enrollment menu when logged in as
+	  student
+
+2010-11-13 13:45  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* pages/data/crc_page_header_band.html: changed version number
+
+2010-11-13 13:28  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* tests/simpletest/README: README for simpletest updated
+
+2010-11-13 13:22  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* ChangeLog: ChangeLog upd
+
+2010-11-13 13:19  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* classes/crc_evaluation.cls.php, pages/crc_handler.php,
+	  pages/data/crc_evaluation_main.html,
+	  pages/data/crc_teacher_main.html, tests/evaluation_test.php,
+	  tests/simpletest/README, tests/web_test.php: fixed course
+	  evaluation, added basic test support for course evaluation,
+	  changed message displayed for teacher when no course is
+	  scheduled, improved test support for student attendance
+
+2010-11-05 18:12  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* ChangeLog: ChangeLog upd
+
+2010-11-05 18:09  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* classes/crc_profile.cls.php, install.txt, pages/crc_handler.php,
+	  pages/data/crc_edit_profile_main.html, tests/web_test.php:
+	  corrected bug related to uid change when updating user profile as
+	  admin
+
+2010-11-01 19:19  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* ChangeLog: added README file for unit tests
+
+2010-11-01 19:17  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* install.txt: added README file for unit tests
+
+2010-11-01 19:16  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* tests/simpletest/README: added README file for unit tests
+
+2010-11-01 18:46  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* ChangeLog: ChangeLog upd
+
+2010-11-01 18:44  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* pages/data/crc_page_header_band.html, tests/web_test.php: updated
+	  version number
+
+2010-11-01 17:58  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* ChangeLog: updated ChangeLog
+
+2010-11-01 17:52  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* tests, tests/admin_test.php, tests/all_tests.php,
+	  tests/courses_test.php, tests/dbsetup_test.php,
+	  tests/evaluation_test.php, tests/login_test.php,
+	  tests/mysql_test.php, tests/profile_test.php,
+	  tests/register_test.php, tests/schedule_test.php,
+	  tests/show_passes.php, tests/simpletest, tests/teacher_test.php,
+	  tests/web_test.php: added unit testing
+
+2010-11-01 17:50  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* classes/crc_admin.cls.php, classes/crc_courses.cls.php,
+	  classes/crc_profile.cls.php, pages/crc_courses.php,
+	  pages/crc_handler.php, pages/data/crc_course_stats_main.html,
+	  pages/data/crc_edit_course_main.html,
+	  pages/data/crc_edit_profile_main.html,
+	  pages/data/crc_profile_main.html,
+	  pages/data/crc_schedule_main.html,
+	  pages/data/crc_students_main.html,
+	  pages/data/crc_teacher_main.html, scripts/tools.js: added unit
+	  testing using simpletest framework
+
+2010-10-19 06:42  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* ChangeLog: changeLog upd
+
+2010-10-19 06:35  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* ChangeLog, classes/crc_admin.cls.php,
+	  classes/crc_courses.cls.php, classes/crc_dbsetup.cls.php,
+	  classes/crc_evaluation.cls.php, classes/crc_login.cls.php,
+	  classes/crc_mysql.cls.php, classes/crc_profile.cls.php,
+	  classes/crc_register.cls.php, classes/crc_schedule.cls.php,
+	  classes/crc_teacher.cls.php, mysql/setup.php,
+	  pages/crc_handler.php, pages/data/crc_admin_add_course.html,
+	  pages/data/crc_admin_add_student.html,
+	  pages/data/crc_db_setup_main.html, pages/data/crc_help_main.html,
+	  pages/data/crc_login_main.html,
+	  pages/data/crc_register_main.html,
+	  pages/data/crc_teacher_main.html, scripts/tools.js: improved
+	  error handling when adding a student/course, minor corrections
+
+2010-10-13 06:42  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* ChangeLog: ChangeLog upd
+
+2010-10-13 06:41  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* classes/crc_admin.cls.php: if the course name is already in
+	  database, exit with error instead of updating the course info
+
+2010-10-13 06:29  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* ChangeLog: ChangeLog upd
+
+2010-10-13 06:29  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* ChangeLog, classes/crc_admin.cls.php, pages/crc_handler.php,
+	  pages/data/crc_register_main.html: improved error handing when
+	  addin a student/course, adding a student fails if the student is
+	  already in database
+
+2010-10-12 15:48  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* ChangeLog: ChangeLog upd
+
+2010-10-12 15:46  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* install.txt: corrected typo
+
+2010-10-12 15:23  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* ChangeLog: release 2.0.0
+
+2010-10-12 15:20  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* ChangeLog, classes/crc_evaluation.cls.php, install.txt,
+	  mysql/crc_database_setup.sql, pages/crc_handler.php,
+	  pages/data/crc_course_stats_main.html,
+	  pages/data/crc_evaluation_main.html,
+	  pages/data/crc_help_main.html, pages/data/crc_teacher_main.html:
+	  added for students the ability to provide course feedback,
+	  teachers are able to see course stats (attendance, feedback),
+	  minor improvements and bug fixing
+
+2010-10-10 15:46  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* ChangeLog: ChangeLog updated
+
+2010-10-10 15:41  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* install.txt: updated list of features
+
+2010-10-10 15:33  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* ChangeLog: ChangeLog updated
+
+2010-10-10 15:30  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* classes/crc_evaluation.cls.php, classes/crc_graph.mod.php,
+	  classes/crc_handler.php, mysql/crc_database_setup.sql,
+	  pages/crc_evaluation.php, pages/crc_handler.php,
+	  pages/data/crc_course_stats_main.html,
+	  pages/data/crc_courses_main.html,
+	  pages/data/crc_teacher_main.html: added support for displaying
+	  course feedback, removed classes/crc_handler.php, changed column
+	  name in crc_feedback, GUI improvements
+
+2010-10-09 10:26  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* ChangeLog: changelog upd
+
+2010-10-09 10:25  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* ChangeLog, classes/crc_admin.cls.php,
+	  classes/crc_evaluation.cls.php, classes/crc_teacher.cls.php,
+	  mysql/crc_database_setup.sql, pages/crc_handler.php,
+	  pages/data/crc_admin_add_course.html,
+	  pages/data/crc_admin_add_student.html,
+	  pages/data/crc_courses_main.html,
+	  pages/data/crc_edit_profile_main.html,
+	  pages/data/crc_evaluation_main.html: students are able to
+	  evaluate a course while in progress or completed, changes made to
+	  database template in order to evaluate the course
+
+2010-10-08 06:16  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* ChangeLog: ChangeLog updated
+
+2010-10-08 06:04  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* 20030516_Database_Diagram.png, ChangeLog, admin/phpinfo.php,
+	  classes/crc_admin.cls.php, classes/crc_constants.mod.php,
+	  classes/crc_courses.cls.php, classes/crc_dbsetup.cls.php,
+	  classes/crc_evaluation.cls.php, classes/crc_login.cls.php,
+	  classes/crc_mysql.cls.php, classes/crc_object.cls.php,
+	  classes/crc_profile.cls.php, classes/crc_register.cls.php,
+	  classes/crc_schedule.cls.php, classes/crc_teacher.cls.php,
+	  common/crc_menu.html, crc_index_main.html,
+	  docs/20030516_Database_Diagram.vsd,
+	  docs/20030606_Object_Model_Diagram.vsd, index.php, install.txt,
+	  mysql/crc_database_setup.sql, mysql/create_freesms_database.sh,
+	  mysql/setup.php, pages/crc_admin.php, pages/crc_courses.php,
+	  pages/crc_handler.php, pages/crc_profile.php,
+	  pages/data/crc_admin_add_course.html,
+	  pages/data/crc_admin_add_student.html,
+	  pages/data/crc_admin_main.html,
+	  pages/data/crc_attendance_main.html,
+	  pages/data/crc_courses_main.html,
+	  pages/data/crc_db_setup_main.html,
+	  pages/data/crc_edit_course_main.html,
+	  pages/data/crc_edit_profile_main.html,
+	  pages/data/crc_help_main.html, pages/data/crc_login_main.html,
+	  pages/data/crc_main_main.html,
+	  pages/data/crc_page_footer_band.html,
+	  pages/data/crc_page_header_band.html,
+	  pages/data/crc_profile_main.html,
+	  pages/data/crc_register_main.html,
+	  pages/data/crc_schedule_main.html,
+	  pages/data/crc_students_main.html,
+	  pages/data/crc_teacher_main.html,
+	  pages/data/crc_unknown_main.html, scripts/tools.js: this is the
+	  2.0.0 beta release with some improvements
+
+2010-10-08 05:42  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* admin, admin/phpinfo.php, classes, classes/crc_constants.mod.php,
+	  classes/crc_courses.cls.php, classes/crc_evaluation.cls.php,
+	  classes/crc_handler.php, classes/crc_login.cls.php,
+	  classes/crc_mysql.cls.php, classes/crc_object.cls.php,
+	  classes/crc_profile.cls.php, classes/crc_register.cls.php,
+	  classes/crc_schedule.cls.php, classes/crc_teacher.cls.php,
+	  common, common/crc_menu.html, crc_index_main.html, docs,
+	  docs/20030516 Database Diagram.vsd, docs/20030606 Object Model
+	  Diagram.vsd, faq, faq/crc_index_main.html, faq/index.php, images,
+	  images/Thumbs.db, images/freesms_logo.png,
+	  images/freesms_logo.xcf, images/mysql.gif, images/php.gif,
+	  images/title.jpg, index.php, install.txt, mysql,
+	  mysql/crc_database_setup.sql, pages, pages/crc_admin.php,
+	  pages/crc_attendance.php, pages/crc_construction.php,
+	  pages/crc_courses.php, pages/crc_evaluation.php,
+	  pages/crc_events.php, pages/crc_handler.php, pages/crc_help.php,
+	  pages/crc_login.php, pages/crc_main.php, pages/crc_profile.php,
+	  pages/crc_register.php, pages/crc_schedule.php,
+	  pages/crc_students.php, pages/crc_teacher.php,
+	  pages/crc_team.php, pages/crc_template.php,
+	  pages/crc_unknown.php, pages/data,
+	  pages/data/crc_admin_main.html,
+	  pages/data/crc_attendance_main.html,
+	  pages/data/crc_construction_main.html,
+	  pages/data/crc_courses_main.html,
+	  pages/data/crc_evaluation_main.html,
+	  pages/data/crc_events_main.html, pages/data/crc_help_main.html,
+	  pages/data/crc_login_main.html, pages/data/crc_main_main.html,
+	  pages/data/crc_page_footer_band.html,
+	  pages/data/crc_page_header_band.html,
+	  pages/data/crc_profile_main.html,
+	  pages/data/crc_register_main.html,
+	  pages/data/crc_schedule_main.html,
+	  pages/data/crc_students_main.html,
+	  pages/data/crc_teacher_main.html, pages/data/crc_team_main.html,
+	  pages/data/crc_template_main.html,
+	  pages/data/crc_unknown_main.html, scripts, scripts/tools.js,
+	  styles, styles/crc_main.css: release 1.0
+
+2010-10-08 05:36  Bogdan Cristea <cristeab@users.sourceforge.net>
+
+	* .: added basic folder structure
+

@@ -1,0 +1,103 @@
+<?php
+  if (!isset($_SESSION['uid'])) {
+    echo '<meta http-equiv="refresh"' . 'content="0;URL=crc_login.php">';
+  }
+?>
+<table width="400">
+	<tr>
+
+		<td valign="top" width="80">
+
+			<!--
+			This is the menu
+			-->
+			<br><br>
+
+				<?php
+					include "../common/crc_menu.html";
+				?>
+
+		</td>
+
+
+
+
+		<td valign="top" align="left" width="300">
+	    <!--
+        This is the content
+      -->
+      <br><br>
+      <table class="tbl">
+        <tr><td valign="top">
+          <?php
+            if (isset($_SESSION['msg'])) {
+			     $len = strlen($_SESSION['msg']);
+            } else {
+                $len = 0;
+            }
+
+			if ($len > 0) {
+				print('<tr><td class="RED"><br>' . $_SESSION['msg'] . '<br></td></tr>');
+			}
+
+			$data = $_SESSION['teacherattendancegetdata'];
+
+			print $_SESSION['name'] . ',';
+			print '<p>';
+
+			if (count($data) > 0) {
+
+				print '<p>This page has the attendance for student <b>' . $data[0][2] . ', ' . $data[0][1] . '</b> for the course <a href="crc_handler.php?method=teacher&func=getstudents&scheduleid=' . $data[0][9] . '"><b>' . $data[0][0] . '</b></a>.';
+				print '</p><p>';
+
+				$totalclasses = count($data);
+				$totalpresent = 0;
+				$totalabsent = 0;
+
+				for ($i = 0; $i < $totalclasses; $i++) {
+					if ($data[$i][6] == "P") {
+						$totalpresent = $totalpresent + 1;
+					} else {
+						$totalabsent = $totalabsent + 1;
+					}
+				}
+
+				print '<table>';
+				print '<tr><td>Total number of classes: </td><td align="right">' . $totalclasses . '</td></tr>';
+				print '<tr><td>Total number of classes present: </td><td>' . $totalpresent . '</td></tr>';
+				print '<tr><td>Total number of classes absent: </td><td>' . $totalabsent . '</td></tr>';
+				print '</table>';
+				print '<p>';
+
+		        print '<table width="310" border=0 class="popcal">';
+				print '<tr>';
+				print '<th>Date</th>';
+				print '<th>Attendance</th>';
+				print '</tr>';
+				for ($i=0; $i < count($data); $i++) {
+					print '<tr>';
+					print '<td><center>' . $data[$i][3] . '-';
+					print $data[$i][4] . '-';
+					print $data[$i][5] . '</center></td>';
+					if ($data[$i][6] == "P") {
+						print '<td align="center" class="message">Present</td>';
+					} else {
+						print '<td align="center" class="error">Absent</td>';
+					}
+					print '</tr>';
+				}
+				print '</table>';
+			} else {
+				print '<table class="green"><tr><td>Sorry there are no dates assigned for this student scheduled for this courses offering at this time.</td></tr></table>';
+			}
+			print '<p>';
+			print 'IIT Mandi CMS';
+			print '</p>';
+			print '</td></tr>';
+
+          ?>
+      </table>
+    </td>
+  </tr>
+<table>
+

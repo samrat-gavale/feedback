@@ -1,0 +1,78 @@
+<form name="dbsetup" action="../pages/crc_handler.php?method=admin&func=dbsetup" method="post">
+
+	<table>
+		<tr><td><br/><br/><br/></td></tr>
+	</table>
+	
+	
+	<table align="center" border="0" width="400" cellpadding="6" cellspacing="0" class="std">		
+
+		<?php
+        if (isset($_SESSION['msg'])) {
+            $len = strlen($_SESSION['msg']);
+        } else {
+            $len = 0;
+        }
+		if ($len > 0) {
+			if ($_SESSION['msg'] == "success") {
+				print('<tr>');
+				print('<td colspan="2" align="left" valign="bottom" nowrap>');
+				print('<span class="error">');
+				print('<b>');
+				print('<p>* The default FreeSMS username is "admin" with password "admin".<br>');
+				print('Please change the default values once logged in from "Edit Profile" menu.');
+				print('<p>* Make sure that the FreeSMS Database name, username and password you entered<br>match those found in "[Install Directory]/classes/crc_constants.mod.php".');
+				print('</b>');
+				print('</span>');				
+				print('</td>');
+				print('</tr>');				
+				print('</table>');
+				print('<table>');
+				print('<tr>');
+				print('<td colspan="2" align="center"><br><b><a href="..">Go to login page</a></b></td>');
+				print('</tr>');
+				print('</table>');
+				$_SESSION['msg'] = '';
+				return;			
+			} else {
+				print('<tr><td colspan="2" class="error" align="center"><b>' . $_SESSION['msg'] . '</b></td></tr>');
+				$_SESSION['msg'] = '';
+			}
+		}
+		
+		print('<tr><th colspan="2"><em>FreeSMS Database Setup System</em></th></tr>');
+
+		print('<tr>');	
+		print('<td align="right">FreeSMS Database Name: </td>');
+		print('<td align="left"><input type="text" name="database" size="30" value="crcdb"></td>');
+		print('</tr>');
+		
+		print('<tr>');
+		print('<td align="right">Password for Root User of MySQL Server: </td>');
+		print('<td align="left"><input type="password" name="password" size="30"></td>');
+		print('</tr>');
+
+		print('<tr>');
+		print('<td align="right">Username of FreeSMS Database: </td>');
+		print('<td align="left"><input type="text" name="username" size="30"></td>');
+		print('</tr>');
+		
+		print('<tr>');
+		print('<td align="right">Password for User of FreeSMS Database: </td>');
+		print('<td align="left"><input type="password" name="userpassword" size="30"></td>');
+		print('</tr>');					
+		
+		print('<tr>');
+		print('<td colspan="2" align="center" valign="bottom" nowrap>');
+		print('<input type="submit" name="login" value="Create Database" onclick="javascript:verify("dbsetup");" />');
+		print('</td>');
+		print('</tr>');		
+		?>
+
+	</table>
+
+	<?php
+	print('<p><b>Note</b>: for security reasons empty passwords are not allowed.');
+	?>
+
+</form>

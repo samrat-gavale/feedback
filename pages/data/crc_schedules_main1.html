@@ -1,0 +1,138 @@
+<?php
+  if (!isset($_SESSION['uid'])) {
+    echo '<meta http-equiv="refresh"' . 'content="0;URL=crc_login.php">';
+  }
+?>
+<table width="500">
+	<tr>
+
+		<td valign="top" width="80">
+
+			<!--
+			This is the menu
+			-->
+			<br><br>
+
+				<?php
+					include "../common/crc_menu.html";
+				?>
+
+		</td>
+
+		<td valign="top" align="left" width="420">
+	    <!--
+        This is the content
+      -->
+      <br><br>
+			<table class="tbl">
+        <tr><td valign="top">
+          <?php
+            if (isset($_SESSION['msg'])) {
+                $len = strlen($_SESSION['msg']);
+            } else {
+                $len = 0;
+            }
+            if ($len > 0) {
+               print '<span class=red>' . $_SESSION['msg'] . '</span>';
+            } else {
+              $data = $_SESSION['scheduledata'];
+              print $_SESSION['name'] . ',';
+              print '<p>';
+              print 'Here you will find your course schedule. ';
+              print 'Please note that courses mentioned are forcasts and may ';
+              print 'change upon teacher and student availability.';
+              print '</p><p>';
+
+              if (count($data) > 0) {
+                print '<table width="400" border=0 class="popcal">';
+                print '<tr>';
+                print '  <th>Course Name</th>';
+                print '  <th>Start Date</th>';
+                print '  <th>End Date</th>';
+                print '  <th>Day [Time]</th>';
+                print '  <th>Venue</th>';
+                print '  <th>Room</th>';
+                print '  <th>Price</th>';
+                print '  <th>Status</th>';
+                if ($_SESSION['roleid'] == 3) {
+                   print '  <th>Action</th>';
+                }
+                print '</tr>';
+                for ($i=0; $i < count($data); $i++) {
+
+					if (($i % 2) > 0) {
+						print '<tr bgcolor="silver" valign="top" class="tabon">';
+					} else {
+						print '<tr valign="top" class="taboff">';
+					}
+
+                  //print '<tr>';
+                  print '<td>' . $data[$i][0] . '</td>';
+                  print '<td>' . $data[$i][1] . '</td>';
+                  print '<td>' . $data[$i][2] . '</td>';
+                  print '<td>' . $data[$i][3] . '</td>';
+                  print '<td>N/A</td>';
+                  print '<td>' . $data[$i][8] . '</td>';
+                  print '<td>$' . $data[$i][4] . '</td>';
+                  //print '<td>' . $data[$i][5] . '</td>';
+
+                  switch($data[$i][5]) {
+
+                  	case "Tentative":
+		                print '<td><font color="gray">' . $data[$i][5] . '</font></td>';
+
+						if ($_SESSION['roleid'] == 3) {
+								  print '<td><input type="button" value="Register" onclick="javascript:window.location=\'crc_handler.php?method=schedule&func=add&schedule=' . $data[$i][6] . '\';" class="button"></td>';
+						}
+                  		break;
+
+                  	case "In Progress":
+		                print '<td><font color="maroon">' . $data[$i][5] . '</font></td>';
+						if ($_SESSION['roleid'] == 3) {
+							print '<td>[None]</td>';
+						}
+                  		break;
+                  	case "No Participation":
+		                print '<td><font color="red">' . $data[$i][5] . '</font></td>';
+						if ($_SESSION['roleid'] == 3) {
+							print '<td>[None]</td>';
+						}
+                  		break;
+                  	case "Cancelled":
+		                print '<td><font color="red">' . $data[$i][5] . '</font></td>';
+						if ($_SESSION['roleid'] == 3) {
+							print '<td>[None]</td>';
+						}
+                  		break;
+                  	case "Completed":
+		                print '<td><font color="green">' . $data[$i][5] . '</font></td>';
+						if ($_SESSION['roleid'] == 3) {
+							print '<td>[None]</td>';
+						}
+                  		break;
+                  	default:
+		                print '<td>' . $data[$i][5] . '</td>';
+						if ($_SESSION['roleid'] == 3) {
+							print '<td>[None]</td>';
+						}
+                  }
+
+                  print '</tr>';
+                }
+                print '</table>';
+
+                print '<p>';
+              } else {
+                print '<table class="green"><tr><td>Sorry there are no new courses offered at this time.</td></tr></table>';
+              }
+              print '</p><p>';
+              print '  IIT Mandi CMS Team<br>';
+              print '  </p>';
+              print '</td></tr>';
+            }
+          ?>
+      </table>
+    </td>
+  </tr>
+</table>
+

@@ -1,0 +1,71 @@
+<?php
+  if (!isset($_SESSION['uid'])) {
+    echo '<meta http-equiv="refresh"' . 'content="0;URL=crc_login.php">';
+  }
+?>
+<table width="500">
+	<tr>
+
+		<td valign="top" width="80">
+
+			<!--
+			This is the menu
+			-->
+			<br><br>
+
+				<?php
+					include "../common/crc_menu.html";
+				?>
+
+		</td>
+
+
+
+
+		<td valign="top" align="left" width="420">
+	    <!--
+        This is the content
+      -->
+      <br><br>
+        <table width="400" border=0 class="tbl">
+        <tr><td valign="top">
+          <?php print($_SESSION['name']); ?>,
+
+          <p>
+		This page has been setup to appreciate the CRC members
+		who tirelessly devote their time (voluntarily) to CRC. All
+		names are in alphabetical order by first name.
+
+	<p>
+          <table width="400" class="mocal">
+          	<tr>
+          		<th>Name</th>
+          		<th>Designation</th>
+          	<tr>
+		<tr>
+			<td>Jeff Adams</td>
+			<td>Hardware Support</td>
+		</tr>				
+		<tr>
+			<td>Tom Jones</td>
+			<td>Coordinator/Administrator</td>
+		</tr>				
+		<tr>
+			<td>Ted Peters</td>
+			<td>Consultant</td>
+		</tr>				
+		<tr>
+			<td>Shaffin N. Bhanji</td>
+			<td>Manager</td>
+		</tr>				
+	</table>
+
+          <p>
+          IIT Mandi CMS Team<br>
+
+        </td></tr>
+      </table>
+    </td>
+  </tr>
+<table>
+

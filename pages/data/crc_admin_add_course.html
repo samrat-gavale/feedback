@@ -1,0 +1,62 @@
+<form name="adminaddcourse" action="crc_handler.php?method=admin&func=addcourse" method="post">
+
+<input type="hidden" name="context" value="ou=Don Mills,ou=Toronto,ou=Ontario,ou=Canada,o=CRC World">
+
+<tr bgcolor="#F2F5A9">
+	<td valign="top"  >
+			<?php
+				include "../common/crc_menu.html";
+				include "../classes/crc_graph.mod.php";
+			?>
+	</td>
+		<td valign="top" align="left" width="100%">
+	    <!--
+        This is the content
+      -->
+      <table class="tbl" cellpadding="15" width="100%" >
+        <tr>
+      <?php
+		print '<tr><td>';
+		print '<table class="std">';
+        if (isset($_SESSION['msg'])) {
+	  	    $len = strlen($_SESSION['msg']);
+        } else {
+            $len = 0;
+        }
+		if ($len > 0) {
+			print('<tr><td colspan="2" class="error" align="center"><b>' . $_SESSION['msg'] . '</b></td></tr>');
+			$_SESSION['msg'] = "";
+		}      
+		$data = $_SESSION["data"];
+		print '<tr>';
+			print '<th colspan="2"><em>Enter Course Information</em></th>';
+		print '</tr>';
+		print '<tr>';
+        	print '<td align="right"><span class="error">*</span>Course Number: </td>';
+        	print '<td><input type="text" name="cnum" size="50" value="' . $data['cnum'] . '"></td>';
+        print '</tr>';
+		print '<tr>';
+        	print '<td align="right">Course Name: </td>';
+        	print '<td><input type="text" name="cname" size="50" value="' . $data['cname'] .'"></td>';
+        print '</tr>';
+		print '<tr>';
+			print '<td align="right"><span class="error">*</span>Teacher(s): </td>';
+			print '<td>';
+			$data = $_SESSION['teacherscheduledata'];
+			for ($i=0; $i < count($data); $i++) {
+				print '<input type=checkbox name="teacher' . $i . '">' . $data[$i]['name'] . '<br>';
+			}
+			print '</td>';
+		print '</tr>';
+		print '<tr>';
+      		print '<td colspan="2" align="center"><BR/><input type="submit" name="Add" value="Add" onclick="javascript:verify(\'adminaddcourse\');">';
+		  	print '</br></br>';
+		  	print '</td>';
+    	print '</tr>';
+    	print '</table>';
+	?>
+  
+</table>
+
+</form>
+

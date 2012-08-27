@@ -1,0 +1,74 @@
+<?php
+  if (!isset($_SESSION['uid'])) {
+    echo '<meta http-equiv="refresh"' . 'content="0;URL=crc_login.php">';
+  }
+?>
+<table width="500">
+	<tr>
+
+		<td valign="top" width="80">
+
+			<!--
+			This is the menu
+			-->
+			<br><br>
+
+				<?php
+					include "../common/crc_menu.html";
+				?>
+
+		</td>
+
+
+
+
+		<td valign="top" align="left" width="420">
+	    <!--
+        This is the content
+      -->
+      <br><br>
+        <table width="400" border=0 class="tbl">
+        <tr><td valign="top">
+          <?php print($_SESSION['name']); ?>,
+
+          <p>
+          Here you will find the current announcements and events that are organized
+          by the CRC.
+          
+          <p>
+          <table width="400" class="mocal">
+          	<tr>
+          		<th>Announcement</th>
+          		<th>Type</th>
+          	<tr>
+		<tr>
+			<td>
+				The CRC is pleased to inform registrants that 
+				it now can provide wireless internet access. CRC recently
+				installed a new wireless network device that lets computers
+				within 200 meters access the internet, if equiped with a 
+				wireless netwaork adapter. Please contact a CRC
+				member for further information.
+			</td>
+			<td>Announcement</td>
+		</tr>				
+		<tr>
+			<td>
+				The CRC is pleased to inform members that 
+				internet access is available to all members.
+				A CRC class will be open for internet
+				access seven (7) days a week. 
+			</td>
+			<td>Announcement</td>
+		</tr>				
+	</table>
+
+          <p>
+          IIT Mandi CMS Team<br>
+
+        </td></tr>
+      </table>
+    </td>
+  </tr>
+<table>
+

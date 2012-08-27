@@ -1,0 +1,76 @@
+<form name="adminaddstudent" action="crc_handler.php?method=admin&func=addstudent" method="post">
+
+<tr bgcolor="#F2F5A9">
+	<td valign="top"  >
+			<?php
+				include "../common/crc_menu.html";
+				include "../classes/crc_graph.mod.php";
+			?>
+	</td>
+		<td valign="top" align="left" width="100%">
+	    <!--
+        This is the content
+      -->
+      <table class="tbl" cellpadding="15" width="100%" >
+        <tr>
+      <?php
+		print '<tr><td>';
+		print '<table class="std">';
+        if (isset($_SESSION['msg'])) {
+            $len = strlen($_SESSION['msg']);
+        } else {
+            $len = 0;
+        }
+		if ($len > 0) {
+			print('<tr><td colspan="2" class="error" align="center"><b>' . $_SESSION['msg'] . '</b></td></tr>');
+			$_SESSION['msg'] = "";
+		}
+		$data = $_SESSION['data'];
+		print '<tr>';
+			print '<th colspan="2"><em>Enter Student Information</em></th>';
+		print '</tr>';
+		print '<tr>';
+			print '<td align="right"><span class="error">*</span>Enrollment No: </td>';
+			print '<td><input type="text" name="enrollno" size="15" value="' . $data['enrollno'] . '"></td>';
+		print '</tr>';
+		print '<tr>';
+			print '<td align="right"><span class="error">*</span>Name: </td>';
+			print '<td><input type="text" name="name" size="15" value="' . $data['name'] . '"></td>';
+		print '</tr>';
+		print '<tr>';
+			print '<td align="right"><span class="error">*</span>Gender: </td>';
+			print '<td><select name="gender">';
+			if(strtolower($data['gender']) == 'male') {
+				print '<option selected>Male</option>';
+				print '<option >Female</option>';
+			} else {
+				print '<option >Male</option>';
+				print '<option selected>Female</option>';
+			}
+			print '</select>';
+			print '</td>';
+		print '</tr>';
+		print '<tr>';
+			print '<td align="right">Email: </td>';
+			print '<td><input type="text" name="email" size="40" value="' . $data['email'] . '"></td>';
+		print '</tr>';
+		print '<tr>';
+			print '<td align="right"><span class="error">*</span>Course(s): </td>';
+			print '<td>';
+			$data = $_SESSION['coursesdata'];
+			for ($i=0; $i < count($data); $i++) {
+				print '<input type=checkbox name="course' . $i . '">' . $data[$i]['cnumname'] . '<br>';
+			}
+			print '</td>';
+		print '</tr>';
+		print '<tr>';
+      		print '<td colspan="2" align="center"><BR/><input type="submit"  name="Add" value="Add" onclick="javascript:verify(\'adminaddstudent\');">';
+		  	print '<br/><br/></td>';
+    	print '</tr>';		
+    	print '</table>';		
+	  ?>
+  
+</table>
+
+</form>
+

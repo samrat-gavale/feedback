@@ -1,0 +1,76 @@
+<?php
+  if (!isset($_SESSION['uid'])) {
+    echo '<meta http-equiv="refresh"' . 'content="0;URL=crc_login.php">';
+  }
+?>
+<table width="500">
+	<tr>
+
+		<td valign="top" width="80">
+
+			<!--
+			This is the menu
+			-->
+			<br><br>
+
+				<?php
+					include "../common/crc_menu.html";
+				?>
+
+		</td>
+
+
+
+
+		<td valign="top" align="left" width="420">
+	    <!--
+        This is the content
+      -->
+      <br><br>
+      <table class="tbl">
+        <tr><td valign="top">
+          <?php
+            if (isset($_SESSION['msg'])) {
+			     $len = strlen($_SESSION['msg']);
+            } else {
+                $len = 0;
+            }
+
+			if ($len > 0) {
+				print('<tr><td class="RED"><br>' . $_SESSION['msg'] . '<br></td></tr>');
+			}
+
+			print $_SESSION['name'] . ',';
+			print '<p>';
+
+			print 'Here you will find some of the administrations tools to help you ';
+			print 'administer the FreeSMS online registration system and more.';
+			print '<p>';
+
+	              print '<table width="400" border=0 class="popcal">';
+			//print '<table border=1>';
+			print '<tr>';
+			print '  <th>Tool Name</th>';
+			print '  <th>Tool Description</th>';
+			print '  <th>Added By</th>';
+			print '</tr>';
+
+			print '<tr>';
+			print '  <td><a href="../admin/phpMyAdmin"><b>phpMyAdmin</b></a></td>';
+			print '  <td>This application is a GUI to administer a MySQL Server database.</td>';
+			print '  <td>Shaffin Bhanji</td>';
+			print '</tr>';
+
+			print '</table>';
+
+			print '</p><p>';
+			print '  IIT Mandi CMS';
+			print '  </p>';
+			print '</td></tr>';
+
+		  ?>
+      </table>
+    </td>
+  </tr>
+<table>
+

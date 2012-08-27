@@ -1,0 +1,3 @@
+http://students.ee.sun.ac.za/doc/php5-auth-pam/examples/
+http://packages.debian.org/lenny/mipsel/php5-auth-pam/filelist
+http://www.dokuwiki.org/auth:pam

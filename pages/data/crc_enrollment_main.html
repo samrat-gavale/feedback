@@ -1,0 +1,77 @@
+<form name="editprofile" action="crc_handler.php?method=courses&func=enroll" method="post">
+<!--<table width="550" bgcolor="#ffffff" >-->
+<tr>
+	<td>
+			<?php
+				include "../common/crc_menu.html";
+			?>
+	
+	</td>
+</tr>
+	<tr>
+		<td valign="top" align="left" width="100%">
+	    <!--
+        This is the content
+      -->
+      <table class="tbl" cellpadding="15" width="100%">
+        <tr><td valign="top">
+          <?php
+            if (isset($_SESSION['msg'])) {
+			     $len = strlen($_SESSION['msg']);
+            } else {
+                $len = 0;
+            }
+
+			if ($len > 0) {
+				print('<tr><td class="RED"><br>' . $_SESSION['msg'] . '<br></td></tr>');
+			}
+
+			$data = $_SESSION['coursesdata'];
+			$data_len = count($data);
+
+			print $_SESSION['name'] . ',';
+            print '<p>';
+            print '&nbsp These are all available courses, if any. Select the courses you want to enroll to and click on "Enroll" button. ';
+            print 'Note that after you enroll to a course, a request will be sent to the course instructor for approval of your enrollment. You will be able to give feedback only after the instructor has done so.';
+            print '</p><p><center>';
+
+			if ($data_len > 0) {
+
+		        print '<table width="550" border=0 class="popcal">';
+				print '<tr>';
+				print '  <th>Course Number</th>';
+				print '  <th>Course Name</th>';
+				print '  <th>Enroll to</th>';
+				print '</tr>';
+
+				for ($i=0; $i < $data_len; $i++) {
+
+					print '<tr>';
+					print '<td align="center">' . $data[$i][1] . '</td>';
+					print '<td align="center">' . $data[$i][2] . '</td>';
+					//display the course as checked or unchecked
+					if (true == $data[$i][5]) {
+						print '<td align="center"><input type=checkbox checked disabled name="course' . $i . '"></td>';
+					} else {
+						print '<td align="center"><input type=checkbox name="course' . $i . '"></td>';
+					}
+
+					print '</tr>';
+
+				}
+
+				print '</table>';
+
+				print '<center>';
+    	  		print '<p><input type="submit"  name="Enroll" value="Enroll">';
+				print '</center>';
+
+			} else {
+				print '<table class="green"><tr><td>&nbsp Sorry there are no courses in the database at this time.</td></tr></table>';
+			}
+
+		  ?>
+<!--      </table>-->
+    </td>
+  </tr>
+</form>

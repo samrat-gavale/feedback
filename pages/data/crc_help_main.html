@@ -1,0 +1,33 @@
+<?php
+if (!isset($_SESSION['uid'])) {
+    echo '<meta http-equiv="refresh"' . 'content="0;URL=crc_login.php">';
+}
+include_once('../classes/crc_profile.cls.php');
+?>
+<tr bgcolor="#F2F5A9">
+	<td valign="top"  >
+			<?php
+				include "../common/crc_menu.html";
+			?>
+	
+	</td>
+		<td valign="top" align="left" width="100%">
+	    <!--
+        This is the content
+      -->
+      <table class="tbl" cellpadding="15" width="100%" >
+        <tr><td valign="top" >
+          <?php print($_SESSION['name']); ?>,
+
+          <p>
+          In order to get help, please send email to the following address.
+          <?php
+          $profile = new crc_profile(false);
+		  $profile->fn_getprofile("admin");
+          print '<a href=mailto:' . $profile->m_data[5] . '><b>cfadmin@iitmandi.ac.in</b></a>'; 
+          ?>.
+          </p>
+         <br><br>
+		</td>
+		</tr>
+		</table>

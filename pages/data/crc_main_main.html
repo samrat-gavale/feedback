@@ -1,0 +1,32 @@
+<?php
+  if (!isset($_SESSION['uid'])) {
+    echo '<meta http-equiv="refresh"' . 'content="0;URL=crc_login.php">';
+  }
+?>
+<tr bgcolor="#F2F5A9">
+	<td valign="top"  >
+			<?php
+				include "../common/crc_menu.html";
+			?>
+	
+	</td>
+		<td valign="top" align="left" width="100%">
+	    <!--
+        This is the content
+      -->
+      <table class="tbl" cellpadding="15" width="100%" >
+        <tr><td valign="top" >
+						 Welcome <?php print($_SESSION['name']); ?>,
+						
+						 <p>
+						 You have accessed the IIT Mandi Course Feedback System.
+						 Please use the menu on your left in order to navigate through the system. 
+						 </p>
+						 <br><br>
+					</td>
+				</tr>
+			</table>
+
+		</td>
+	</tr> 
+

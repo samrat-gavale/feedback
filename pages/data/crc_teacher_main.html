@@ -1,0 +1,101 @@
+<?php
+  if (!isset($_SESSION['uid'])) {
+    echo '<meta http-equiv="refresh"' . 'content="0;URL=crc_login.php">';
+  }
+include_once('../classes/crc_profile.cls.php');
+?>
+<table width="550">
+	<tr>
+
+		<td valign="top" width="80">
+			<!--
+			This is the menu
+			-->
+			<br><br>
+				<?php
+					include "../common/crc_menu.html";
+				?>
+		</td>
+
+		<td valign="top" align="left" width="550">
+	    <!--
+        This is the content
+      -->
+      <br><br>
+      <table class="tbl">
+        <tr><td valign="top">
+          <?php
+            if (isset($_SESSION['msg'])) {
+			     $len = strlen($_SESSION['msg']);
+            } else {
+                $len = 0;
+            }
+
+			if ($len > 0) {
+				print('<tr><td class="RED"><br>' . $_SESSION['msg'] . '<br></td></tr>');
+			}
+
+			$data = $_SESSION['teacherscheduledata'];
+
+			print $_SESSION['name'] . ',';
+			print '<p>';
+
+			if (count($data) > 0) {
+				print '&nbsp These are your courses, if any. Please note that courses mentioned are forcasts and may ';
+            	print 'change upon teacher and student availability.';
+				print '<br>&nbsp By clicking on the students number you will be able to mark the attendance for the current date.';
+				print '<br>&nbsp By clicking on the course name you will be able to see course statistics (attendance, course feedback).';
+				print '<p></p>';
+
+		        print '<table width="550" border=0 class="popcal">';
+				print '<tr>';
+				print '  <th>Course Number</th>';
+				print '  <th>Course Name</th>';
+				print '  <th>Students approved</th>';
+				print '  <th>Students to approve</th>';
+				print '</tr>';
+
+				for ($i=0; $i < count($data); $i++) {
+
+					print '<tr>';
+					print '<td align="center"><b>' . $data[$i][1] . '</b></a></td>';
+					print '<td align="center">' . $data[$i][2] . '</td>';
+//					print '<td align="center">' . $data[$i][5] . '</td>';
+			   		print '<td align="center"><a href="crc_handler.php?method=teacher&func=getstudentsapproved&scheduleid=' . $data[$i][3] . '"><b>' . $data[$i][5] . '</b></a></td>';
+//					print '<td align="center">' . $data[$i][6] . '</td>';
+			   		print '<td align="center"><a href="crc_handler.php?method=teacher&func=getstudentstoapprove&scheduleid=' . $data[$i][3] . '"><b>' . $data[$i][6] . '</b></a></td>';
+
+/*					if ($data[$i][9] == 0) {
+					   print '<td align="center">0</td>';
+					} else {
+					   	if (strtolower($data[$i][5]) == "in progress") {
+					   		print '<td align="center"><a href="crc_handler.php?method=teacher&func=getstudents&scheduleid=' . $data[$i][6] . '"><b>' . $data[$i][9] . '</b></a></td>';
+						} else {
+							print '<td align="center"><b>' . $data[$i][9] . '</b></td>';
+						}
+					}
+*/					print '</tr>';
+
+				}
+
+				print '</table>';
+
+			} else {
+				$profile = new crc_profile(false);
+		  		$profile->fn_getprofile("admin");
+				print '<table class="green"><tr><td>&nbsp Sorry there are no courses assigned to you at this time. Please contact ';
+				print 'the <a href=mailto:' . $profile->m_data[5] . '><b>administrator</b></a> if you require assistance.</td></tr></table>';
+
+			}
+
+			print '</p><p>';
+			print ' IIT Mandi CMS';
+			print '  </p>';
+			print '</td></tr>';
+
+		  ?>
+      </table>
+    </td>
+  </tr>
+<table>
+

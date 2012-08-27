@@ -1,0 +1,32 @@
+<!--
+This is the menu
+-->
+<table align="left" width="90">
+	<?php
+	 if ($_SESSION['roleid'] == 3) {
+	   print '<tr align="center"><td nowrap><a href="crc_handler.php?method=courses&func=get" class="hdr">Courses</a></td></tr>';
+	   /*
+	    * This hides link to Enrollment page through which students can enroll themselves for sourses
+	   print '<tr align="left"><th nowrap><a href="crc_handler.php?method=courses&func=editenroll" class="hdr">Enrollment</a></th></tr>';
+	   */
+	   
+	 } else if ($_SESSION['roleid'] == 4) {
+	   print '<tr align="center"><td nowrap><a href="crc_handler.php?method=evaluation&func=schedulelist" class="hdr">Get Feedback</a></td></tr>';
+	   print '<tr align="center"><td nowrap><a href="crc_handler.php?method=profile&func=get" class="hdr">Edit Profile</a></td></tr>';
+	 } else if ($_SESSION['roleid'] == 2) {
+	   print '<tr align="left"><td nowrap><a href="crc_handler.php?method=teacher&func=getschedule" class="hdr">Courses</a></td></tr>';
+	 } else if ($_SESSION['roleid'] == 1) {
+	   print '<tr align="center"><td nowrap><a href="crc_handler.php?method=admin&func=showaddcourse" class="hdr">Add Course</a></td></tr>';
+	   print '<tr align="center"><td nowrap><a href="crc_handler.php?method=courses&func=active_courselist" class="hdr">Active Courses</a></td></tr>';
+	   print '<tr align="center"><td nowrap><a href="crc_handler.php?method=courses&func=inactive_courselist" class="hdr">Inactive Courses</a></td></tr>';
+	   print '<tr align="center"><td nowrap><a href="crc_handler.php?method=admin&func=showaddstudent" class="hdr">Add Student</a></td></tr>';
+	   print '<tr align="center"><td nowrap><a href="crc_handler.php?method=profile&func=studentlist" class="hdr">Edit Student</a></td></tr>';	
+	   print '<tr align="center"><td nowrap><a href="crc_handler.php?method=profile&func=get" class="hdr">Edit Profile</a></td></tr>';
+	 }
+	?>
+	<!-- following commenting is to hide link to edit profile
+	<tr align="left"><th nowrap><a href="crc_handler.php?method=profile&func=get" class="hdr">Edit Profile</a></th></tr>
+	-->
+	<tr align="center"><td nowrap ><a href="crc_handler.php?method=help&func=get" class="hdr">Help</a></td></tr>
+	<tr align="center"><td nowrap><a href="crc_handler.php?method=logout" class="hdr">Logout</a></td></tr>
+</table>

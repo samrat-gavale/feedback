@@ -1,0 +1,86 @@
+This file will provide you with a brief description of FreeSMS and instructions
+on how to install FreeSMS.
+
+Since it's development in 2003, FreeSMS has successfully offered educational organizations
+an easy to use and effective facility to manage courses, teachers and students.
+FreeSMS provides the following features:
+
+ - Support for profile based management: Administrator, Teacher and Student
+ - Online teacher and student registration
+ - Allow admin to add courses
+ - Allow admin to add students and enroll them to one or more courses
+ - Allow admin to edit students already entered into database
+ - Allow admin to edit courses already entered into database
+ - Allow teachers to manage student attendance
+ - Allow teachers to display graphically course attendance and feedback
+ - Allow students to check their enrollment and provide feedback for a course
+ 
+Features to implement:
+
+ - Allow admin to perform sanity checks on the database
+ - Allow students/admin to withdraw from an enrolled course
+
+From a technical perspective FreeSMS is based on PHP5 and requires a MySQL database. This 
+demonstration site has been tested on: 
+
+openSUSE 11.4 with
+ - Apache 2.2.17 (<a href="http://www.apache.org">www.apache.org</a>)
+ - PHP 5.3.6 (<a href="http://www.php.net">www.php.net</a>)
+ - MySQL 5.5.13 (<a href="http://www.mysql.com">www.mysql.com</a>)
+ 
+ and
+ 
+ Windows Seven 32 bits with
+ - WampServer 2.1 (<a href="http://www.wampserver.com/">www.wampserver.net</a>) or
+ - XAMPP 1.7.4 (<a href="http://www.apachefriends.org/en/xampp.html">http://www.apachefriends.org/en/xampp.html</a>)
+
+In order to install FreeSMS, please use the following instructions:
+
+1. Download FreeSMS: 
+====================
+FreeSMS can be downloaded at http://sourceforge.net/projects/freesms/.
+You need also a properly configured http server (e.g. Apache) capable
+of running php code and a MySQL server. On Windows OSs the recommended
+approach is to use WampServer or XAMPP.
+
+2. Extract FreeSMS: 
+===================
+Now that you have a zip file, you need to extract it a directory in the 
+path of your web server root (or have an alias setup). For example, if 
+you have a public_home folder you could extract there FreeSMS archive. 
+
+3. MySQL Server Database Setup:
+===============================
+For security reasons, you need a 'root' account with nonempty password configured on the MySQL server.
+Also, for the same reasons, the password of the user account needed to access the FreeSMS database cannot be empty.
+From web browser: go to the following link: http://<server>/freesms/mysql/setup.php
+and follow the instructions (root access to the MySQL database is needed).
+From Linux terminal: use the bash script provided in "[Install Directory]/mysql/" folder 
+(root access to the MySQL database is needed).
+
+4. Configure PHP Script:
+========================
+We now need to setup the primary configuration file that FreeSMS
+requires to successfully administer the application. In the directory
+"[Install Directory]/classes/" you fill find a file crc_constants.mod.php. 
+Open this file and modify MYSQL_SERVER, MYSQL_PORT, MYSQL_DB, MYSQL_USER and MYSQL_PASS
+constants to reflect the connection parameters that need to be used when FreeSMS 
+interacts with the MySQL database.
+
+Once the file has been modified approprietly, you can now use one of the links
+below to login into FreeSMS, enjoy!
+
+
+5. Start Using FreeSMS:
+=======================
+To continue, please select the following resource link 
+http://<server>/freesms
+
+I hope that you find FreeSMS usefull. If you have any further questions or comments please
+do not hesitate to check out the postings on the project page. 
+For those of you who would like to help out, we are looking for
+volunteers on this project, please send us an email.
+
+Thank You,
+FreeSMS Team.
+

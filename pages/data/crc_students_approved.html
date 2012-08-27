@@ -1,0 +1,89 @@
+<?php
+  if (!isset($_SESSION['uid'])) {
+    echo '<meta http-equiv="refresh"' . 'content="0;URL=crc_login.php">';
+  }
+?>
+<table width="500">
+	<tr>
+
+		<td valign="top" width="80">
+
+			<!--
+			This is the menu
+			-->
+			<br><br>
+				<?php
+					include "../common/crc_menu.html";
+				?>
+		</td>
+
+		<td valign="top" align="left" width="420">
+	    <!--
+        This is the content
+      -->
+      <br><br>
+      <table class="tbl">
+        <tr><td valign="top">
+          <?php
+            if (isset($_SESSION['msg'])) {
+			     $len = strlen($_SESSION['msg']);
+            } else {
+                $len = 0;
+            }
+
+			if ($len > 0) {
+				print('<tr><td class="error"><br>' . $_SESSION['msg'] . '<br></td></tr>');
+				$_SESSION['msg'] = '';
+			}
+
+			$data = $_SESSION['teacherstudentsdata'];
+
+			print $_SESSION['name'] . ',';
+			print '<p>';
+			print 'Here you will find the students registered for the course which are already approved by you: ';
+			print '<br><b><center>' . $data[0][1] . ' - ' . $data[0][2] . '</center></b>';
+			print '</center></b>';
+			print '</p>';
+
+			if (count($data) > 0) {
+
+	          print '<table width="300" border=0 class="popcal" align="center">';
+			  print '<tr>';
+			  print '  <th>Enrollment No.</th>';
+			  print '  <th>Name</th>';
+			  print '  <th>Email</th>';
+			  print '  <th>Action</th>';
+			  print '</tr>';
+
+			  for ($i=0; $i < count($data); $i++) {
+
+				print '<tr align="left">';
+//				print '<td align = "center"><a href="crc_handler.php?method=teacher&func=getattendance&profileid=' . $data[$i][6] . '&scheduleid=' . $data[$i][0] . '"><b>' . $data[$i][3] . ',&nbsp;' . $data[$i][2] . '</b></a></td>';
+				print '<td align = "center"><a href="crc_handler.php?method=teacher&func=getattendance&profileid=' . $data[$i][5] . '&scheduleid=' . $data[$i][0] . '"><b>' . $data[$i][5] . '</b></a></td>';
+				print '<td align = "center"><b>' . $data[$i][3] . '</b></a></td>';
+				if (strlen(trim($data[$i][4]))> 0) {
+					print '<td align = "center"><a href="mailto:' . $data[$i][4] . '">' . $data[$i][4] . '</a></td>';
+				} else {
+					print '<td align = "center">N/A</td>';
+				}
+					print '<td align = "center"><input type="button" value="Disapprove" onclick="javascript:window.location=\'crc_handler.php?method=teacher&action=DAP&func=approve&scheduleid=' . $data[0][0] . '&studentscheduleid=' . $data[$i][7] . '\';" class="button"></td>';
+				print '</tr>';
+
+			  }
+
+			  print '</table>';
+
+			} else {
+
+			  print '<table class="green"><tr><td>Sorry there are no students enrolled for this class which are already approved by you.</td></tr></table>';
+
+			}
+			print '  </p>';
+			print '</td></tr>';
+
+		  ?>
+      </table>
+    </td>
+  </tr>
+<table>
+

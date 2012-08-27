@@ -1,0 +1,98 @@
+
+			<table width="500">
+				<tr>
+					<td valign="top">
+						<br>
+						 Welcome,
+						
+						 <p>
+						 You have accessed the Free Student Management System's (FreeSMS) demonstartion Website. Here
+						 you will find resources and information regarding FreeSMS.
+
+						<p>
+						Since it's development in 2003, FreeSMS has successfully offered educational organizations
+						an easy to use and effective facility to manage courses, teachers and students.
+						FreeSMS provides the following features: <br>
+						<ul>
+							<li>Manage courses within a class environment
+							<li>Sopport for profile based management: Administrator, Teacher and Student
+							<li>Online teacher and student registration
+							<li>Allow students to self manage class enrollment
+							<li>Allow teachers to manage student attendance
+							<li>Ability for students to submit course evaluations
+						</ul>
+						
+						<p>
+						From a technical perspective FreeSMS is based on PHP4 and requires a MySQL database. This 
+						demonstration site has been tested on: <br> 
+						<ul>
+							<li>Apache 1.3.33 (<a href="http://www.apache.org">www.apache.org</a>)
+							<li>PHP 4.3.9 (<a href="http://www.php.net">www.php.net</a>)
+							<li>MySQL 4.1.7 (<a href="http://www.mysql.com">www.mysql.com</a>)
+						</ul>
+						
+						<p>
+						In order to install FreeSMS, please follow the following instructions: <br>
+						<ol>
+							<li><b>Download FreeSMS</b>
+								<p>
+								FreeSMS can be downloaded at 
+								<a href="http://sourceforge.net/projects/freesms/">FreeSMS Download</a>.
+							<li><b>Extract FreeSMS</b>
+								<p>
+								Now that you have a zip file, you need to extract it a directory in the 
+								path of your web server root (or have an alias setup). For example if 
+								the path to your web server's document root is "C:\www" than you need
+								to create a folder "C:\www\freesms" and extract all the files into that 
+								directory. 
+							<li><b>MySQL Server Database Setup</b>
+								<p>
+								The first step required is to setup the MySQL database for FreeSMS
+								usage. I personally prefer 
+								<a href="http://sourceforge.net/projects/phpmyadmin/">MyPhpAdmin</a>.
+								Using MyPhpAdmin craete a databse called 'crcdb'. Using MyPhpAdmin's SQL window open the 
+								<a href="mysql/crc_database_setup.sql">Database Setup Script File</a> and
+								modify line 27, 28 and 33 to suit the username and password to manage FreeSMS. 
+								After modifying your user information, run the script. Me sure to run the 
+								SQL script against the 'crcdb' database. You should now
+								have a working database for FreeSMS.
+								<p>
+								The database setup is now done, we now need to proceed to setup
+								the FreeSMS configuration script(s) as pere the next instruction
+								below. 
+							<li><b>Configure PHP Script</b>
+								<p>
+								We now need to setup the primary configuration file that FreeSMS
+								requires to successfully administer the application. In the directory
+								"[Install Directory]/classes/" you fill find a file crc_constants.mod.php. 
+								Open this file and modify lines 19, 20, 22 and 23 to reflect the connection
+								parameters that needs to be used when FreeSMS interacts with the MySQL database.
+								<p>
+								Once thie file has been modified approprietly, you can now use one of the links
+								below to login into FreeSMS, enjoy!
+						</ol>
+
+						<p>
+						To continue, please select one of the resource links provided below: <br>
+						<ul>
+							<li><a href="pages/crc_login.php"><b>Teacher Registration System</b></a> (for those who want to volunteer for teaching)
+							<li><a href="pages/crc_login.php"><b>Student Registration System</b></a> (for those who want to enroll in a course)
+							<li><a href="faq/index.php"><b>Frequently Asked Questions (FAQ)</b></a>
+						</ul>
+						
+						<p>
+						<p>
+						 I hope that you find FreeSMS usefull. If you have any further questions or comments please
+						 do not hesitate to check out the postings on the project page or email me directly at
+						 shaffin_bhanji@yahoo.ca. For those of you who would like to help out, I am looking for
+						 volunteers on this project, please send me an email.
+						
+						 <p>
+						 Thank You, <br>
+						 Shaffin Bhanji <br> 
+						 FreeSMS Project Developer.<br>
+						 </p>
+					</td>
+				</tr>
+			</table>
+

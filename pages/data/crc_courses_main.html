@@ -1,0 +1,102 @@
+<?php
+  if (!isset($_SESSION['uid'])) {
+    echo '<meta http-equiv="refresh"' . 'content="0;URL=crc_login.php">';
+  }
+?>
+
+<tr bgcolor="#F2F5A9">
+	<td valign="top"  >
+			<?php
+				include "../common/crc_menu.html";
+			?>
+	
+	</td>
+		<td valign="top" align="left" width="100%">
+	    <!--
+        This is the content
+      -->
+      <table class="tbl" cellpadding="15" width="100%" >
+        <tr><td valign="top" >
+          <?php
+            if (isset($_SESSION['msg'])) {
+                $len = strlen($_SESSION['msg']);
+            } else {
+                $len = 0;
+            }
+            if ($len > 0) {
+              print '<span class=red>' . $_SESSION['msg'] . '</span>';
+			  $_SESSION['msg'] = "";
+            } else {
+              $data = $_SESSION['coursesdata'];
+              print '<p align="left">';
+              print $_SESSION['name'] . ',';
+              print '&nbsp These are the courses that you have registered for, if any.';
+              print '</p><p align="center">';
+
+              if (count($data) > 0) {
+                print '<table width="550" border=1 class="popcal" >';
+                print '<tr>';
+                print '  <th>Course Number</th>';
+                print '  <th>Course Name</th>';
+//                print '  <th>Approved</th>';
+                print '  <th>Feedback</th>';
+//                print '  <th>Deroll</th>';
+                print '</tr>';
+                for ($i=0; $i < count($data); $i++) {
+
+					if (($i % 2) > 0) {
+						print '<tr bgcolor="silver" valign="top">';
+					} else {
+						print '<tr valign="top">';
+					}
+                  print '<td align="center">' . $data[$i][0] . '</td>';
+                  print '<td align="center">' . $data[$i][1] . '</td>';
+
+				  if($data[$i][7])        //if approved
+				  {
+//					  print '<td align="center">&#10004;</td> ';
+					  $feedback_disabled = '';
+//					  $deroll_disabled = 'disabled';
+				  }
+				  else
+				  {
+//					  print '<td align="center">&#10008;</td>';
+					  $feedback_disabled = '';
+//					  $deroll_disabled = '';
+				  }
+                  switch(strtolower($data[$i][3])) {
+                  	case "in progress":
+						if ($data[$i][6] == 0) {
+	                  		print '<td align="center"><input type="button" value="Give Feedback" ' . $feedback_disabled . ' onclick="javascript:window.location=\'crc_handler.php?method=evaluation&func=get&student_schedule=' . $data[$i][5] . '\';" class="button"></td>';
+						} else {
+	                  		print '<td align="center">Submitted</td>';
+						}
+//	                  		print '<td align="center"><input type="button" value="Deroll" ' . $deroll_disabled . ' onclick="javascript:window.location=\'crc_handler.php?method=courses&func=deroll&student_schedule=' . $data[$i][5] . '\';" class="button"></td>';
+                  		break;
+                  	case "completed":
+	                  		print '<td align="center">Completed</td>';
+//	                  		print '<td align="center"><input type="button" value="Deroll" disabled onclick="javascript:window.location=\'crc_handler.php?method=courses&func=deroll&student_schedule=' . $data[$i][5] . '\';" class="button"></td>';
+                  		break;
+                  	default:
+		                print '<td align="center">default ' . $data[$i][3] . '</td>';
+//                  		print '<td align="center">[None]</td>';
+                  }
+
+                  print '</tr>';
+                }
+                print '</table>';
+              } else {
+                print '<table class="green"><tr><td>You currently have not registered';
+				print ' for any courses. In order to enroll, please visit the [Enrollmen]';
+				print ' link and add the course(s) that you would like to enroll for.</td></tr></table>';
+              }
+
+              print '  </p>';
+              print '</td></tr>';
+            }
+          ?>
+<!--      </table>   -->
+    </td>
+  </tr>
+</table>
+

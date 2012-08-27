@@ -1,0 +1,172 @@
+<tr bgcolor="#F2F5A9">
+	<td valign="top"  >
+			<?php
+				include "../common/crc_menu.html";
+			?>
+	
+	</td>
+		<td valign="top" align="left" width="100%">
+	    <!--
+        This is the content
+      -->
+      <table class="tbl" cellpadding="15" width="100%" >
+        <tr><td valign="top" >
+					<?php
+
+					print '<form name="register" action="crc_handler.php?method=evaluation&func=add" method="post">';
+
+					print '<table>';
+
+					print '<input type="hidden" name="schedule_id" value="' . $_GET['course'] . '">';
+
+                    if (isset($_SESSION['msg'])) {
+                        $len = strlen($_SESSION['msg']);
+                    } else {
+                        $len = 0;
+                    }
+
+					if ($len > 0) {
+
+						print('<tr><td class="RED"><br>' . $_SESSION['msg'] . '<br></td></tr>');
+						$_SESSION['msg'] = "";
+
+					} else {
+
+						print '<tr>';
+						print '	<td>';
+
+						print '	  Welcome ' . $_SESSION['name'] . ',';
+
+						print '	  <p>';
+						print '	Please respond to each statement.<br/>';
+						print ' Your thoughtful response to these questions will help improve the quality of future offerings of this course.<br>';
+						print 'This feedback will be given to the instructor only after the grades are announced.<br/>';
+					    print ' Use the following six point scale and tick the one which best represent your opinion.<br/> If the statement is not applicable tick NA.';
+						print 'Thank you.';
+						
+						print '    <p>';
+						print '	   <p>';
+						print '		Circle the number that you think applies the closest to your experience. The numbers';
+						print '		signify as follows:';
+						print '		<table border="2" cellpadding="3">';
+						print '     <tr>';
+						print '		<td>';
+						print '		<font color="GREEN">0</font>-Not Applicable (NA)';
+						print '		</td>';
+						print '		<td>';
+						print '		<font color="GREEN">1</font>-Strongly Disagree';
+						print '		</td>';
+						print '		<td>';
+						print '		<font color="GREEN">2</font>-Disagree';
+						print '		</td>';
+						print '		<td>';
+						print '		<font color="GREEN">3</font>-Neutral';
+						print '		</td>';
+						print '		<td>';
+						print '		<font color="GREEN">4</font>-Agree';
+						print '		</td>';
+						print '		<td>';
+						print '		<font color="GREEN">5</font>-Strongly Agree';
+						print '		</td>';
+						print '		</tr>';	
+						print '		</table> <br>';
+						print '<b>Please note that once you submit your feedback you cannot change your answers or reevaluate this course.</b>';
+						print '<p><br></td>';
+						print ' </tr>';
+
+						print '<tr>';
+						print '	<td>';
+
+					$data = $_SESSION['evaluation'];
+					$records = count($data);
+
+					if ($records > 0) {
+
+						print '<table border="1" align="left" cellpadding="3" cellspacing="0">';
+
+						print '<tr  CLASS="backgroundblack" valign="center">';
+						print '<td  CLASS="fontwhite" width="5" align="center">No.</td>';
+						print '<td class="fontwhite" width="200" align="center"><br>Question<br><br></td>';
+						print '<td class="fontwhite" width="10" align="center">0</td>';
+						print '<td class="fontwhite" width="10" align="center">1</td>';
+						print '<td class="fontwhite" width="10" align="center">2</td>';
+						print '<td class="fontwhite" width="10" align="center">3</td>';
+						print '<td class="fontwhite" width="10" align="center">4</td>';
+						print '<td class="fontwhite" width="10" align="center">5</td>';
+						print '</tr>';
+/*						print '<tr>';
+						print '<td>'; print '1'; 
+						print '</td>';
+						print '<td colspan="8"><b>Regarding Course:</b></td>';
+						print '</tr>';
+*/
+						for($i = 0; $i < $records; $i++) {
+
+							$row = $data[$i];
+
+							switch(strtolower($row[3])) {
+
+								case "option":
+
+									if (($i % 2) > 0) {
+										$myform = '<tr bgcolor="silver" valign="center" align="center">';
+									} else {
+										$myform = '<tr valign="center" align="center">';
+									}
+									$myform = $myform . '<td>' . trim($i + 1) . '.</td>';
+									$myform = $myform . '<td align="left">' . $row[1] . '</td>';
+									$myform = $myform . '<td>';
+									$myform = $myform . '<input type="radio" name="' . $row[0] . 'name' . '" value="0" >';
+									$myform = $myform . '</td>';
+									$myform = $myform . '<td>';
+									$myform = $myform . '<input type="radio" name="' . $row[0] . 'name' . '" value="1" >';
+									$myform = $myform . '</td><td>';
+									$myform = $myform . '<input type="radio" name="' . $row[0] . 'name' . '" value="2">';
+									$myform = $myform . '</td><td>';
+									$myform = $myform . '<input type="radio" name="' . $row[0] . 'name' . '" value="3">';
+									$myform = $myform . '</td><td>';
+									$myform = $myform . '<input type="radio" name="' . $row[0] . 'name' . '" value="4">';
+									$myform = $myform . '</td><td>';
+									$myform = $myform . '<input type="radio" name="' . $row[0] . 'name' . '" value="5">';
+									$myform = $myform . '</td><td>';
+									$myform = $myform . '</td>';
+									$myform = $myform . '</tr>';
+									break;
+
+								case "comment":
+
+									if (($i % 2) > 0) {
+										$myform = '<tr bgcolor="silver" valign="top">';
+									} else {
+										$myform = '<tr valign="top">';
+									}
+//$myform = $myform . '<td>';$myform = $myform . '</td>';
+									$myform = $myform . '<td>' . trim($i + 1) . '.</td>';
+									$myform = $myform . '<td>' . $row[1] . '</td>';
+									$myform = $myform . '<td colspan="6">';
+									$myform = $myform . '<textarea name="' . $row[0] . 'name' . '" cols="47" rows="3" wrap="soft"></textarea>';
+									$myform = $myform . '</td>';
+									$myform = $myform . '</tr>';
+									break;
+
+							}
+							print $myform;
+						}
+						print '<tr>';
+						print '<td align="center" colspan="8"><br><input type="submit" name="submit" value="Submit"><br><br></td>';
+						print '</tr>';
+						print '</table>';
+					} else {
+						print '<tr><td>Sorry the evaluation form is not available at this time. Please try again at a later date.</td></tr>';
+					}
+
+					}
+
+					?>
+			</form>
+		</td>
+		</tr>
+	</table>
+</td>
+</tr>
+</table>

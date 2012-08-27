@@ -1,0 +1,221 @@
+<form name="editcourse" action="crc_handler.php?method=courses&func=updatecourse" method="post">
+
+<input type="hidden" name="context" value="ou=Don Mills,ou=Toronto,ou=Ontario,ou=Canada,o=CRC World">
+
+<tr bgcolor="#F2F5A9">
+	<td valign="top"  >
+			<?php
+				include "../common/crc_menu.html";
+			?>
+	
+	</td>
+		<td valign="top" align="left" width="100%">
+	    <!--
+        This is the content
+      -->
+      <table class="tbl" cellpadding="15" width="100%" >
+        <tr><td valign="top" >
+
+    <?php
+		if ($_GET['func'] == 'schedulelist') {
+			$data = $_SESSION['scheduledata'];
+			$data_len = count($data);			
+
+			print '<table class="std" width="470" align="left">';
+
+            if (isset($_SESSION['msg'])) {
+			     $len = strlen($_SESSION['msg']);
+            } else  {
+                $len = 0;
+            }
+			if ($len > 0) {
+    			print('<tr><td colspan="2" class="error" align="center"><b>' . $_SESSION['msg'] . '</b></td></tr>');
+				$_SESSION['msg'] = "";
+			}
+			
+			print '<tr>';
+			print '<th colspan="2"><em>Courses List</em></th>';
+			print '</tr>';
+			
+			print '<tr><td>';
+			
+			if ($data_len > 0) {	
+				print '<tr>';
+        		print '<td>Below are all courses found in the database:</td>';
+        		print '</tr>';		
+				for ($i = 0; $i < $data_len; $i++) {
+					print '<tr>';
+					$cnumname = $data[$i]['cnumname'];
+					print '<td align="left" colspan="2"><a href="crc_handler.php?method=evaluation&func=getoverallstats&scheduleid=' . $data[$i]['scheduleid'] . '"><b>' . $cnumname . '</b></a></td>';
+					print '</tr>';	
+				}			
+			} else {
+        		print '<tr>';
+        		print '<td class="error" align="center">No courses found in the database.</td>';
+        		print '</tr>';
+			}
+			print '</td></tr>';
+			print '</table>';
+
+		} else if ($_GET['func'] == 'register') {
+
+			$data = $_SESSION['coursesdata'];
+			$data_len = count($data);
+			$scheduledata = $_SESSION['scheduledata'];
+
+			print '<table class="std">';
+            if (isset($_SESSION['msg'])) {
+			     $len = strlen($_SESSION['msg']);
+            } else {
+                $len = 0;
+            }
+			if ($len > 0) {
+    			print('<tr><td colspan="2" class="error" align="center"><b>' . $_SESSION['msg'] . '</b></td></tr>');
+				$_SESSION['msg'] = "";
+			}
+			
+			print '<tr>';
+			print '<th colspan="2"><em>Register for Course(s)</em></th>';
+			print '</tr>';
+			
+			print '<tr><td>';
+			print '<table  width="300" align="left" border="0" cellpadding="6" cellspacing="0">';
+			
+			if ($data_len > 0) {	
+				print '<tr>';
+        		print '<br>Below are all courses found in the database:<br><br>';
+        		print '</tr>';
+				for ($i = 0; $i < $data_len; $i++) {
+					//check if the current course is already selected by this student
+					$found = false;
+					for ($j=0; $j < count($scheduledata); $j++) {						
+						if (strpos($data[$i]['cnamedesc'], $scheduledata[$j][0]) !== false) {
+							$found = true;
+							break;
+						}
+					}
+					//display the course as checked or unchecked
+					if ($found == true) {
+						print '<input type=checkbox disabled="disabled" checked name="course' . $i . '">' . $data[$i]['cnamedesc'] . '<br>';
+					} else {
+						print '<input type=checkbox name="course' . $i . '">' . $data[$i]['cnamedesc'] . '<br>';
+					}	
+				}
+				print '<tr>';
+      			print '<td colspan="2" align="center"><BR/><input type="submit"  name="Register" value="Register" onclick="javascript:verify(\'registercourse\');">';
+		  		print '</td>';
+    			print '</tr>';
+			} else {
+        		print '<tr>';
+        		print '<td class="error" align="center">No courses found in the database.</td>';
+        		print '</tr>';
+			}
+			print '</td></tr>';
+			print '</table>';
+
+		} else if ($_GET['func'] == 'editcourse') {
+
+			$data = $_SESSION['coursesdata'];
+			$teacherdata = $_SESSION['teacherscheduledata'];
+
+			if (($data == null) || ($teacherdata == null)) {
+				
+				print '<table class="std">';
+				print '<tr>';
+					print '<th colspan="2"><em>Courses List</em></th>';
+				print '</tr>';
+				print '<tr><td colspan="2" class="error" align="center">Cannot get course information</td></tr>';
+				print '</table>';
+				return;
+
+			}
+        	print '<input type="hidden" name="courseid" value="' . $data[0] . '" class="text">';
+
+			print '<table class="tbl">';
+			$len = strlen($_SESSION['msg']);
+			if ($len > 0) {
+    			print('<tr><td colspan="2" class="error" align="center"><b>' . $_SESSION['msg'] . '</b></td></tr>');
+				$_SESSION['msg'] = "";
+			}
+			print '<tr>';
+			print '<th colspan="2"><em>Edit Course Information</em></th>';
+			print '</tr>';
+			print '<tr>';
+        		print '<td align="right"><span class="error">*</span>Course Number: </td>';
+        		print '<td><input type="text" name="cnum" size="50" value="' . $data[1] . '"></td>';
+        	print '</tr>';
+			print '<tr>';
+        		print '<td align="right">Course Name: </td>';
+        		print '<td><input type="text" name="cname" size="50" value="' . $data[2] .'"></td>';
+        	print '</tr>';
+			print '<tr>';
+        		print '<td align="right">Course Status: </td>';
+          		print '<td><select name="cstatus">';
+					switch (strtolower($data[7])) {
+						case "in progress":
+            				print("<option selected>In Progress</option>");
+            				print("<option>Tentative</option>");
+							print("<option>Completed</option>");
+							print("<option>No Participation</option>");
+							print("<option>Cancelled</option>");
+						break;
+						case "tentative":
+							print("<option>In Progress</option>");
+            				print("<option selected>Tentative</option>");
+							print("<option>Completed</option>");
+							print("<option>No Participation</option>");
+							print("<option>Cancelled</option>");
+						break;
+						case "completed":
+							print("<option>In Progress</option>");
+            				print("<option>Tentative</option>");
+							print("<option selected>Completed</option>");
+							print("<option>No Participation</option>");
+							print("<option>Cancelled</option>");
+						break;
+						case "no participation":
+							print("<option>In Progress</option>");
+            				print("<option>Tentative</option>");
+							print("<option>Completed</option>");
+							print("<option selected>No Participation</option>");
+							print("<option>Cancelled</option>");
+						break;
+						case "cancelled":
+							print("<option>In Progress</option>");
+            				print("<option>Tentative</option>");
+							print("<option>Completed</option>");
+							print("<option>No Participation</option>");
+							print("<option selected>Cancelled</option>");
+						break;
+					}
+          		print '</select>';
+        	print '</tr>';
+			print '<tr>';
+				print '<td align="right">Teacher(s): </td>';
+				print '<td>';				
+				for ($i=0; $i < count($teacherdata); $i++) {
+					if ($teacherdata[$i]['assigned'] == true) {
+						print '<input type=checkbox checked name="teacher' . $i . '">' . $teacherdata[$i]['name'] . '<br>';
+					} else {
+						print '<input type=checkbox name="teacher' . $i . '">' . $teacherdata[$i]['name'] . '<br>';
+					}
+				}
+				print '</td>';
+			print '</tr>';
+			print '<tr>';
+				if($data[3] == 1) {
+					print '<td colspan="2" align="center"><input type=checkbox checked name="cactive">Active<br></td>';
+				} else {
+					print '<td colspan="2" align="center"><input type=checkbox name="cactive">Active<br></td>';
+				}
+			print '</tr>';
+  			print '<tr>';
+      			print '<td colspan="2" align="center"><BR/><input type="submit" name="Update" value="Update" onclick="javascript:verify(\'editcourse\');">';
+				print '</td>';
+    		print '</tr>';
+			print '</table>'; 
+
+		}
+    ?>
+</table>
+</form>

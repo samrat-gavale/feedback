@@ -1,0 +1,63 @@
+<?php
+  if (isset($_SESSION['uid'])) {
+    echo '<meta http-equiv="refresh"' . 'content="0;URL=crc_main.php">';
+  }
+?>
+<tr bgcolor="#FFFFFF">
+		<td valign="top" width="100%">
+
+<form name="login" action="crc_handler.php?method=login" method="post">
+	<table bgcolor="#FFFFFF" border="0" width="704" cellpadding="6" cellspacing="0" class="login-table">		
+
+		<?php
+            if(isset($_SESSION['msg'])) {
+			     $len = strlen($_SESSION['msg']);
+            } else {
+                $len = 0;
+            }
+            if ($len > 0) {
+                print('<tr><td align="center" colspan="2"class="error"><b>' . $_SESSION['msg'] . '</b></td></tr>');
+				$_SESSION['msg'] = "";
+            }
+		?>
+		
+		<tr>
+			
+			<td align="right">Username: </td>
+					
+			<?php
+	
+				if (isset($_GET['uid'])) {
+	
+					print('<td align="left"><input type="text" name="username" size="30" value="' . $_GET['uid'] . '"></td>');
+	
+				} else {
+	
+					print('<td align="left"><input type="text" name="username" size="30"></td>');
+	
+				}
+			?>
+	
+		</tr>
+		
+		<tr>
+		
+			<td align="right">Password:</td> 
+			<td align="left"><input type="password" name="password" size="30"></td>
+			
+		</tr>
+		
+		<tr>
+			<td align="center" colspan="2">
+				<input type="hidden" name="context" value="ou=Don Mills,ou=Toronto,ou=Ontario,ou=Canada,o=CRC World">
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="2" align="center" valign="bottom" nowrap>
+				<input type="submit" name="login" value="login" onclick="javascript:verify('login');" class="login-button" />
+			</td>
+		</tr>
+	</table>
+	</td>
+</form>

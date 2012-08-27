@@ -1,0 +1,6 @@
+This folder should contain "SimpleTest" files for Unit Testing for PHP
+The latest version can be downloaded from http://www.simpletest.org/
+In order to run the tests:
+ * check the variables defined in setup_vars.php
+ * point your web browser to: http://<server>/FreeSMS/tests/all_tests.php
+

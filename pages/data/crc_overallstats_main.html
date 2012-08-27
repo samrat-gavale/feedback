@@ -1,0 +1,107 @@
+<tr bgcolor="#F2F5A9">
+	<td valign="top"  >
+			<?php
+				include "../common/crc_menu.html";
+				include "../classes/crc_graph.mod.php";
+			?>
+	</td>
+		<td valign="top" align="left" width="100%">
+	    <!--
+        This is the content
+      -->
+      <table class="tbl" cellpadding="15" width="100%" >
+        <tr>
+          <?php
+            if (isset($_SESSION['msg'])) {
+                $len = strlen($_SESSION['msg']);
+            } else {
+                $len = 0;
+            }
+            if ($len > 0) {
+               	print '<span class=red>' . $_SESSION['msg'] . '...</span>';
+				$_SESSION['msg'] = '';
+            } else {
+				$data = $_SESSION['evaluation'];
+				$data_sdevcnt = $_SESSION['sdevcnt'];
+				$overallavg = $_SESSION['overallavg'];
+				$overallminmax = $_SESSION['overallminmax'];
+				if ($data != null) 
+				{
+					$course_num = $_SESSION['coursesdata']['coursenum'];
+					$course_name = $_SESSION['coursesdata']['coursename']; 
+					print '<th colspan="2"><b>Feedback for the course ' . $course_num . ' - ' . $course_name;
+					print '<br><font color="white"><a href="crc_handler.php?method=evaluation&func=downloadpdf3&scheduleid=' . $_GET['scheduleid'] . '" target="new"><font color="red">Download 1</font></a></font>';
+					print '<br><font color="white"><a href="crc_handler.php?method=evaluation&func=downloadpdf2&scheduleid=' . $_GET['scheduleid'] . '" target="new"><font color="red">Download 2</font></a></font></b></th>';
+		print '</tr>';
+		print '<tr><td>';
+		print '<table class="std">';
+
+	$width_ques = 450;
+	$width_no = 25;
+	$width_avg = 55;
+	$width_sdev = 55;
+	$width_cnt = 55;
+	$course_feedback_tbl = <<<EOD
+		<tr align="center">
+			<td rowspan="2" width="$width_no">No.</td>
+			<td rowspan="2" width="$width_ques">Question</td>
+		<td colspan="3">$course_num - $course_name</td>
+		<td colspan="3">All courses</td>
+		</tr>
+		<tr align="center">
+			<td width="$width_avg">Avg</td>
+			<td width="$width_sdev">Std Dev</td>
+			<td width="$width_cnt">No. of Resp</td>
+			<td width="$width_cnt">AVG</td>
+			<td width="$width_cnt">MIN</td>
+			<td width="$width_cnt">MAX</td>
+    </tr>
+EOD;
+
+					for($i = 0; $i < count($data)-1; $i++)
+					{
+						if($data[$i]['que_no']>21)
+						{
+							$course_feedback_tbl.= '<tr><td align="center"> ' . $data[$i]['que_no'] . '</td>';
+							$course_feedback_tbl.= '<td align="left" colspan="7"> ' . $data[$i]['que'] . '</td></tr>';
+						}
+						else
+						{
+							$course_feedback_tbl.= '<tr><td align="center"> ' . $data[$i]['que_no'] . '</td>';
+							$course_feedback_tbl.= '<td align="left"> ' . $data[$i]['que'] . '</td>';
+							$course_feedback_tbl.= '<td align="center">' . $data[$i]['ans'] . '</td>';   //1st </td> for ending question
+							$course_feedback_tbl.= '<td align="center">' . $data_sdevcnt[$i]['standarddeviation'] . '</td>';       //sdev 
+							$course_feedback_tbl.= '<td align="center">' . $data_sdevcnt[$i]['responsecount'] . '</td>';       //cnt
+							$course_feedback_tbl.= '<td align="center">' . $overallavg[$i+1]['avg'] . '</td>';       //avg
+							$course_feedback_tbl.= '<td align="center">' . $overallminmax[$i+1]['min'] . '</td>';       //min
+							$course_feedback_tbl.= '<td align="center">' . $overallminmax[$i+1]['max'] . '</td>';       //max
+							$values['Q' . ($i+1)] = $data[$i]['ans'];     //array index starts form 0, question number starts from 1
+							$course_feedback_tbl.= '</tr>';
+						}
+					}
+
+					$counter = 0;
+					foreach($data['comm'] as $comment)
+					{
+						$counter++;
+						$course_feedback_tbl.= '<tr><td  align="center">'. $counter .'</td>';
+						$course_feedback_tbl.= '<td align="left" colspan="7">' . $comment . '</td></tr>';						
+					}
+
+					echo $course_feedback_tbl;
+									
+					print '<tr><td align="center" colspan="8">';
+					print '<table>';
+					print '<tr><td align="center"><br></td></tr>';								
+					print ae_bar_html($values);
+					print '<tr><td align="center" colspan="' . count($values) . '"><b>Mean feedback at each question (min 1, max 5)</b></td></tr>';
+					print '</table>';
+					print '</td></tr>';
+				print '</table>';
+				}
+            }
+        ?>
+    </td>
+  </tr>
+</table>
+
